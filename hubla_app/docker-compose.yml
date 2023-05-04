@@ -1,0 +1,35 @@
+# docker-compose up sobe a aplicaçao
+# docker-compose down desliga a aplicaçao
+version: '3'
+
+services:
+  app: #nome que se escolhe para o serviço
+    build: /server #construir de um dockerfile que esta na mesma pasta
+    entrypoint: .docker/entrypoint.sh # acessar o entrypoint
+    container_name: hubla-app #nome do container
+    ports:
+      - "3000:3000" #portas utilizadas
+      - "5555:5555"
+      - "8000:8000"
+    volumes:
+      - .:/home/node/app #compartilhar tudo da pasta atual com a pasta /home/node/app
+    depends_on:
+      - db # depende que outro container ja esteja em execuçao
+    environment:
+      - DATABASE_URL=postgresql://postgres:docker@db:5432/hubla?schema=public
+      - NODE_ENV=development
+      - PORT=3000
+
+  db:
+    build: .docker/postgres # busca o dockerfile da pasta .docker constroi a imagem e executa o container
+    container_name: hubla-db
+    restart: always # sera reiniciado quando houver um problema
+    tty: true # para ter acesso ao terminal
+    ports:
+      - "5432:5432"
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/data #compartilhar tudo da pasta .docke/dbdata com a pasta /var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=docker # variaveis de ambiente
+      - POSTGRES_DB=hubla #nome do banco de dados
+
