@@ -8,11 +8,11 @@ import ProductsList from './ProductsList';
 
 export default observer(function ProductsDashboard() {
   const { productStore } = useStore();
-  const { loadProducts, products } = productStore;
+  const { loadProducts, allProducts } = productStore;
 
   useEffect(() => {
-    if (products.length <= 1) loadProducts();
-  }, [loadProducts, products]);
+    if (allProducts.length <= 1) loadProducts();
+  }, [loadProducts, allProducts]);
 
   if (productStore.loadingInitial)
     return <LoadingComponent content="Loading app" />;

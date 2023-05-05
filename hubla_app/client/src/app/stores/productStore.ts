@@ -6,7 +6,7 @@ import { IProductCreate } from '../models/productCreate';
 
 export default class ProductStore {
   products: IProduct[] = [];
-  //   productsRegistry = new Map<number, IProduct>();
+  productsRegistry = new Map<number, IProduct>();
   loadingInitial = false;
   productDto: IProductCreate = {
     name: '',
@@ -18,18 +18,26 @@ export default class ProductStore {
     makeAutoObservable(this);
   }
 
+  get allProducts() {
+    return Array.from(this.productsRegistry.values());
+  }
+
   loadProducts = async () => {
     this.setLoadingInitial(true);
     try {
       const products = await requestApi.Products.list();
       products.forEach((product: IProduct) => {
-        this.products.push(product);
+        this.setProducts(product);
       });
       this.setLoadingInitial(false);
     } catch (error) {
       console.log(error);
       this.setLoadingInitial(false);
     }
+  };
+
+  private setProducts = (product: IProduct) => {
+    this.productsRegistry.set(product.id, product);
   };
 
   createProduct = async () => {

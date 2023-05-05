@@ -5,12 +5,12 @@ import { useStore } from '../../../app/stores/store';
 
 export default observer(function UserList() {
   const { productStore } = useStore();
-  const { products } = productStore;
+  const { allProducts } = productStore;
 
   return (
     <Segment>
       <Item.Group divided>
-        {products.map((product) => (
+        {allProducts.map((product) => (
           <Item key={product.id}>
             <Item.Content>
               <Item.Header as="a">{product.name}</Item.Header>

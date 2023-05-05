@@ -16,18 +16,26 @@ export default class UserStore {
     makeAutoObservable(this);
   }
 
+  get allUsers() {
+    return Array.from(this.usersRegistry.values());
+  }
+
   loadUsers = async () => {
     this.setLoadingInitial(true);
     try {
       const users = await requestApi.Users.list();
       users.forEach((user: IUser) => {
-        this.users.push(user);
+        this.setUsers(user);
       });
       this.setLoadingInitial(false);
     } catch (error) {
       console.log(error);
       this.setLoadingInitial(false);
     }
+  };
+
+  private setUsers = (user: IUser) => {
+    this.usersRegistry.set(user.id, user);
   };
 
   createUser = async (name: string) => {

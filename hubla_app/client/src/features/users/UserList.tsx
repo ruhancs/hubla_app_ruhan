@@ -5,12 +5,12 @@ import { useStore } from '../../app/stores/store';
 
 export default observer(function UserList() {
   const { userStore } = useStore();
-  const { users } = userStore;
+  const { allUsers } = userStore;
 
   return (
     <Segment>
       <Item.Group divided>
-        {users.map((user) => (
+        {allUsers.map((user) => (
           <Item key={user.id}>
             <Item.Content>
               <Item.Header as="a">{user.name}</Item.Header>

@@ -8,11 +8,11 @@ import UserList from './UserList';
 
 export default observer(function UsersDashboard() {
   const { userStore } = useStore();
-  const { loadUsers, users } = userStore;
+  const { loadUsers, allUsers } = userStore;
 
   useEffect(() => {
-    if (users.length <= 1) loadUsers();
-  }, [loadUsers, users]);
+    if (allUsers.length <= 1) loadUsers();
+  }, [loadUsers, allUsers]);
 
   if (userStore.loadingInitial)
     return <LoadingComponent content="Loading app" />;
