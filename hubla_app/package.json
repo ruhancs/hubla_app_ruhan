@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "start:docker": "npm run dev --prefix client & npm run start:dev --prefix server"
+    "start:docker": "npm run dev --prefix client & npm run start:dev --prefix server & npm run migrations --prefix server"
   },
   "dependencies": {
   },
