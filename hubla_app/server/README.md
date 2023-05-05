@@ -29,6 +29,8 @@ $ to run the application again type [docker-compose start]
 # Users
 $ the application will start with the users from the sales list already registered in the database
 
+$ if the seed of users does not work. Before inserting the sales list, register all usernames in the list in create user
+
 $ for the app to carry out the transactions, the users who received the balance must be registered
 
 $ registered users started with 0 balance
@@ -44,6 +46,8 @@ $ users can be deleted at prisma studio, to access prisma studio read the sectio
 
 # Products
 $ the application will start with the products from the sales list already registered in the database
+
+$ if the seed of products does not work, before inserting the sales list, register all products on the list, in create product with the value and product producer
 
 $ for the app to carry out transactions, the products sold must be registered
 
@@ -75,16 +79,19 @@ $ # OBS: if the transactios list or users balance does not update when loading t
 
 ```bash
 # unit tests front end
-$ inside the client folder open the terminal and type the command: [npm run test]
+$ inside the hubla_app folder open the terminal and enter the command: [docker-compose exec app sh] to access the docker
+
+$ enter the command: [cd client]
+
+$ inside the client folder enter the command: [npm run test]
 
 # unit tests back end
-$ inside the server folder open the terminal and type the command: [npm run test]
+$ inside the hubla_app folder open the terminal and enter the command: [docker-compose exec app sh] to access the docker
 
-# e2e tests
-$ npm run test:e2e
+$ enter the command: [cd server]
 
-# test coverage
-$ npm run test:cov
+$ inside the server folder enter the command: [npm run test]
+
 ```
 
 
